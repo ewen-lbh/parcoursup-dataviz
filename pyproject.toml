@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "automation-parcoursup"
+version = "0.1.0"
+description = ""
+authors = ["Ewen Le Bihan <ewen.lebihan7@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+helium = "^3.0.4"
+beautifulsoup = "^4.9.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
