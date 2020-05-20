@@ -2,7 +2,7 @@
 
 ## Installation
 
-Commencez par télécharger le fichier `.whl` depuis l'onglet "Releases".
+Commencez par [télécharger le fichier `.whl`](https://github.com/ewen-lbh/automation-parcoursup/releases/download/v0.1.0/automation_parcoursup-0.1.0-py3-none-any.whl)
 Pour la suite on se dit que le fichier s'appelle `automation_parcoursup-0.1.0-py3-none-any.whl`
 
 ```sh-session
