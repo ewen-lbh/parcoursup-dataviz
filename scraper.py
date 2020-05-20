@@ -18,8 +18,8 @@ def run():
     -C --credentials=FILE   Use the following file (.env format) for parcoursup credentials.
                             keys: PARCOURSUP_ID (N° de dossier) and PARCOURSUP_PASS (Mot de passe)
     """)
-    parcoursup_id = None
-    parcoursup_pass = None
+    parcoursup_id = parcoursup_pass = None
+    
     if args['--credentials']:
         load_dotenv(path.expanduser(args['--credentials']))
         parcoursup_id = getenv('PARCOURSUP_ID', None)
@@ -88,17 +88,7 @@ def run():
         print(f'Scanning {wish_id}')
         is_internat = 'internat' in popup.find_all('ul')[0].find_all('li')[0].contents[0]
         # Initial set
-        group_capacity = None
-        rank = None
-        waitlist_length = None
-        group_rank = None
-        max_admitted_rank = None
-        last_year_max_admitted_rank = None
-        internat_capacity = None
-        internat_group_waitlist_rank = None
-        internat_rank = None
-        internat_condition_group_waitlist_rank = None
-        internat_condition_rank = None
+        group_capacity = rank = waitlist_length = group_rank = max_admitted_rank = last_year_max_admitted_rank = internat_capacity = internat_group_waitlist_rank = internat_rank = internat_condition_group_waitlist_rank = internat_condition_rank = None
         # Traverse DOM lists
         get_number = lambda ul_idx, li_idx: int(popup.find_all('ul')[ul_idx].find_all('li')[li_idx].find('span', class_='strong').string)
         if not is_internat:
@@ -140,9 +130,7 @@ def run():
     
     # Output JSON
     with open(path.join(cachedir, 'data.json'), 'w') as file:
-        file.write(json.dumps(wishes_data, indent=2))
-    
-    return 
+        json.dump(wishes_data, file, indent=2)
 
 if __name__ == "__main__":
     try:
