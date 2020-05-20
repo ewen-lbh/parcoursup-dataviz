@@ -1,16 +1,42 @@
-# automation-parcoursup
+# parcoursup-dataviz
 
 ## Installation
 
-Commencez par [télécharger le fichier `.whl`](https://github.com/ewen-lbh/automation-parcoursup/releases/download/v0.1.0/automation_parcoursup-0.1.0-py3-none-any.whl)
-Pour la suite on se dit que le fichier s'appelle `automation_parcoursup-0.1.0-py3-none-any.whl`
-
+You need [poetry](https://python-poetry.org) to install this.
+ 
 ```sh-session
-$ pip install automation_parcoursup-0.1.0-py3-none-any.whl
-# Configuration, il vous faut vos informations pour que le script se connecte automatiquement à votre compte
-# Bientôt j'ajouterai un mode où on rentre ça manuellement au cas où vous ne me feriez pas confiance 
-# (regardez le script si vous avez des doutes, *et vous devrez toujours*, ne jamais faire confiance aveuglement à un random sur internet)
-$ echo -e 'PARCOURSUP_ID="Votre n° de dossier"\nPARCOURSUP_PASS="Votre mot de passe"' > ~/.parcoursup_creds
-$ parcoursup
+$ git clone https://github.com/ewen-lbh/parcoursup-dataviz
+$ cd parcoursup-dataviz
+$ poetry install
 ```
 
+## Usage
+
+For now you can only save a JSON file with the following format:
+
+```json
+{
+    "AAAA-MM-JJ": [
+        "Nom de la formation": {
+            "id": "identifiant dans le DOM (pas très utile)",
+            "name": "Nom de la formation",
+            "ranks": {
+                "group_capacity": Capacité du groupe,
+                "rank": Position dans la file d'attente,
+                "waitlist_length": Taille de la file d'attente,
+                "group_rank": Position dans le groupe,
+                "max_admitted_rank": Position la plus loin dans la file d'attente à avoir été acceptée cette année,
+                "last_year_max_admitted_rank": Position la plus loin dans la file d'attente à avoir été acceptée en 2019,
+            },
+            "internat": {
+                "capacity" : Capacité de l'internat,
+                "group_waitlist_rank" : Position dans la file d'attente du groupe,
+                "rank" : Position dans la file d'attente,
+                "condition_group_waitlist_rank" : Ont reçu une proposition tout ceux qui était positionnés avant où à cette position dans la file d'attente du groupe (ET voir condition_rank),
+                "condition_rank" : Ont reçu une proposition tout ceux qui était positionnés avant où à cette position dans la file d'attente (ET voir condition_group_waitlist_rank),
+            }
+    ]
+}
+```
+
+I'm working on the graph generation part.
