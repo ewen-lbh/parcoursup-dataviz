@@ -5,7 +5,7 @@ description = ""
 authors = ["Ewen Le Bihan <ewen.lebihan7@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.6"
 helium = "^3.0.4"
 beautifulsoup4 = "^4.9.1"
 pastel = "^0.2.0"
