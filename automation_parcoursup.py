@@ -24,7 +24,7 @@ def run():
     if path.exists(cachefile) and args['--cache']:
         soup = BeautifulSoup(open(cachefile).read(), features='lxml')
     else:
-        browser = start_firefox('https://dossierappel.parcoursup.fr/Candidat/authentification')
+        browser = start_chrome('https://dossierappel.parcoursup.fr/Candidat/authentification')
         # Login
         write(getenv('PARCOURSUP_ID'), into='N° de dossier')
         write(getenv('PARCOURSUP_PASS'), into='Mot de passe')
