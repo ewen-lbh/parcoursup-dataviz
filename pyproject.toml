@@ -12,6 +12,7 @@ pastel = "^0.2.0"
 python-dotenv = "^0.13.0"
 lxml = "^4.5.1"
 docopt = "^0.6.2"
+matplotlib = "^3.2.1"
 
 [tool.poetry.scripts]
 parcoursup = 'automation_parcoursup:run'
