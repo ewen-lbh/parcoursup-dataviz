@@ -44,7 +44,7 @@ $ poetry run python parcoursup_dataviz/scraper.py
 }
 ```
 
-## Get graphs
+### Get graphs
 
 The scripts takes the same CLI arguments as `scraper.py`
 
@@ -56,6 +56,6 @@ Example for one wish:
 
 ![One graph plotting waitlist position & length over time for a wish](./demo-graph.png)
 
-NOTE: The name is removed from the demo image, you'll of course see it.
+NOTE: The wish name has been cut out from the demo image, you'll of course see it.
 
 NOTE: The image is slightly red-tinted here because of my transparent desktop background, the image itself has a perfectly white background.
