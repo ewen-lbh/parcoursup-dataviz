@@ -12,7 +12,11 @@ $ poetry install
 
 ## Usage
 
-For now you can only save a JSON file with the following format:
+### Just get the JSON
+
+```sh-session
+$ poetry run python parcoursup_dataviz/scraper.py
+```
 
 ```json
 {
@@ -40,4 +44,18 @@ For now you can only save a JSON file with the following format:
 }
 ```
 
-I'm working on the graph generation part.
+## Get graphs
+
+The scripts takes the same CLI arguments as `scraper.py`
+
+```sh-session
+$ poetry run python parcoursup_dataviz/visualizer.py
+```
+
+Example for one wish:
+
+![One graph plotting waitlist position & length over time for a wish](./demo-graph.png)
+
+NOTE: The name is removed from the demo image, you'll of course see it.
+
+NOTE: The image is slightly red-tinted here because of my transparent desktop background, the image itself has a perfectly white background.
