@@ -21,7 +21,7 @@ $ poetry run python parcoursup_dataviz/scraper.py
 ```json
 {
     "AAAA-MM-JJ": [
-        "Nom de la formation": {
+        {
             "id": "identifiant dans le DOM (pas très utile)",
             "name": "Nom de la formation",
             "ranks": {
