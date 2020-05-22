@@ -10,7 +10,7 @@ FANCY_COLUMN_NAMES = {
         "group_capacity": "Capacité du groupe",
         "rank": "Position dans la file d'attente",
         "waitlist_length": "Taille de la file d'attente",
-        "group_rank": "Position dans la fiche d'appel",
+        "calllist_rank": "Position dans la fiche d'appel",
         "max_admitted_rank": "",
         "last_year_max_admitted_rank": "",
     },

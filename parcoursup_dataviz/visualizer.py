@@ -30,6 +30,9 @@ by_date = scraper.run()
 by_wish: Dict[str, Any] = {}
 for date, wishes in by_date.items():
     for wish in wishes:
+        if  'group_rank' in wish['ranks'].keys():
+            print(f"ranks.group_rank has been renamed to ranks.calllist_rank\nPlease update your cached JSON in ~/.cache/automation-parcoursup/data.json or run without --cache")
+            exit(1)
         key = wish["id"]
         if key not in by_wish.keys():
             by_wish[key] = []
@@ -66,7 +69,7 @@ for wish_id, wish in by_wish.items():
         axs[idx].plot(data("date"), data("ranks", "waitlist_length"), color="blue")
         axs[idx].legend(('Position', 'Taille de la file d\'attente'))
         # plot(data('date'), data('ranks', 'last_year_max_admitted_rank'), color='red', ls='--')
-        # plot(data('date'), data('ranks', 'group_rank'), color='red')
+        # plot(data('date'), data('ranks', 'calllist_rank'), color='red')
     else:
         axs[idx].plot(data('date'), data('internat', 'group_waitlist_rank'), color="blue")
         axs[idx].plot(data('date'), data('internat', 'condition_group_waitlist_rank'), color="blue", ls="--")

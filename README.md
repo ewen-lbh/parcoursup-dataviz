@@ -28,9 +28,9 @@ $ poetry run python parcoursup_dataviz/scraper.py
                 "group_capacity": "Capacité du groupe",
                 "rank": "Position dans la file d'attente",
                 "waitlist_length": "Taille de la file d'attente",
-                "group_rank": "Position dans le groupe",
-                "max_admitted_rank": "Position la plus loin dans la file d'attente à avoir été acceptée cette année",
-                "last_year_max_admitted_rank": "Position la plus loin dans la file d'attente à avoir été acceptée en 2019",
+                "calllist_rank": "Position dans la liste d'appel",
+                "max_admitted_rank": "Position la plus loin dans la liste d'appel à avoir été acceptée cette année",
+                "last_year_max_admitted_rank": "Position la plus loin dans la liste d'appel à avoir été acceptée en 2019",
             },
             "internat": {
                 "capacity" : "Capacité de l'internat",

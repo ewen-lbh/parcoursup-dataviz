@@ -106,7 +106,7 @@ def run(**cli_args):
         group_capacity = None
         rank = None
         waitlist_length = None
-        group_rank = None
+        calllist_rank = None
         max_admitted_rank = None
         last_year_max_admitted_rank = None
         internat_capacity = None
@@ -125,7 +125,7 @@ def run(**cli_args):
             group_capacity = get_number(0, 0)
             rank = get_number(1, 0)
             waitlist_length = get_number(1, 1)
-            group_rank = get_number(2, 0)
+            calllist_rank = get_number(2, 0)
             max_admitted_rank = get_number(2, 1)
             last_year_max_admitted_rank = get_number(2, 2)
         else:
@@ -149,7 +149,7 @@ def run(**cli_args):
                     "group_capacity": group_capacity,
                     "rank": rank,
                     "waitlist_length": waitlist_length,
-                    "group_rank": group_rank,
+                    "calllist_rank": calllist_rank,
                     "max_admitted_rank": max_admitted_rank,
                     "last_year_max_admitted_rank": last_year_max_admitted_rank,
                 },
@@ -172,7 +172,8 @@ def run(**cli_args):
 
 if __name__ == "__main__":
     try:
-        run()
+        data = run()
+        print(json.dumps(data, indent=2))
     except KeyboardInterrupt:
         print("\n\nAnnulé.")
         exit(1)
