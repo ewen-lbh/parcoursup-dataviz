@@ -89,4 +89,4 @@ for wish_id, wish in by_wish.items():
     idx += 1
 subplots_adjust(hspace=0.4)
 # suptitle('Parcoursup - Vœux en liste d\'attente')
-fig.savefig('temp.png', dpi=100)
+fig.savefig('voeux-en-attente-parcoursup.png', dpi=100)
