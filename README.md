@@ -3,11 +3,11 @@
 ## Installation
 
 You need [poetry](https://python-poetry.org) to install this.
- 
+
 ```sh-session
-$ git clone https://github.com/ewen-lbh/parcoursup-dataviz
-$ cd parcoursup-dataviz
-$ poetry install
+git clone https://github.com/ewen-lbh/parcoursup-dataviz
+cd parcoursup-dataviz
+poetry install
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ $ poetry install
 ### Just get the JSON
 
 ```sh-session
-$ poetry run python parcoursup_dataviz/scraper.py
+poetry run python parcoursup_dataviz/scraper.py
 ```
 
 ```json
@@ -44,12 +44,19 @@ $ poetry run python parcoursup_dataviz/scraper.py
 }
 ```
 
+Here's where these values are extracted from the website:
+
+![parcoursup interface for ranks with labels showing the corresponding JSON keys](ranks-properties-explanation.png)
+
+![parcoursup interface for boarding school ranks with labels showing the corresponding JSON keys](internat-properties-explanation.png)
+
+
 ### Get graphs
 
 The scripts takes the same CLI arguments as `scraper.py`
 
 ```sh-session
-$ poetry run python parcoursup_dataviz/visualizer.py
+poetry run python parcoursup_dataviz/visualizer.py
 ```
 
 Example for one wish:
