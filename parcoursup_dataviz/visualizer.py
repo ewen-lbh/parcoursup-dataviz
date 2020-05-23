@@ -27,6 +27,14 @@ def truncate_title(title: str):
     return truncated
 
 
+def fill_list_to_len(o: list, target_len: int, fill_with: Any = None) -> list:
+    if len(o) >= target_len:
+        return o
+
+    to_fill = (target_len - len(o)) * [fill_with]
+    return o + to_fill
+
+
 # Aggregate by wish
 by_date = scraper.run()
 dates = list(by_date.keys())
@@ -70,35 +78,32 @@ fig.set_size_inches(10, wishes_count * 6, forward=True)
 fig.tight_layout()
 idx = 0
 
-# TODO Add missing dates so that all wishes have the same x axis
 for wish_id, wish in by_wish.items():
     is_internat = wish[0]["is_internat"]
     name = wish[0]["name"]
 
     def data(*keys):
         keystring = ".".join(keys)
-        return [flatten(d)[keystring] for d in wish]
+        return fill_list_to_len(
+            [flatten(d)[keystring] for d in wish], target_len=len(dates)
+        )
 
     if not is_internat:
-        axs[idx].plot(data("date"), data("ranks", "rank"), color="black")
-        axs[idx].plot(data("date"), data("ranks", "waitlist_length"), color="blue")
+        axs[idx].plot(dates, data("ranks", "rank"), color="black")
+        axs[idx].plot(dates, data("ranks", "waitlist_length"), color="blue")
         axs[idx].legend(("Position", "Taille de la file d'attente"))
         # plot(data('date'), data('ranks', 'last_year_max_admitted_rank'), color='red', ls='--')
         # plot(data('date'), data('ranks', 'calllist_rank'), color='red')
     else:
+        axs[idx].plot(dates, data("internat", "group_waitlist_rank"), color="blue")
         axs[idx].plot(
-            data("date"), data("internat", "group_waitlist_rank"), color="blue"
-        )
-        axs[idx].plot(
-            data("date"),
+            dates,
             data("internat", "condition_group_waitlist_rank"),
             color="blue",
             ls="--",
         )
-        axs[idx].plot(data("date"), data("internat", "rank"), color="black")
-        axs[idx].plot(
-            data("date"), data("internat", "condition_rank"), color="black", ls="--"
-        )
+        axs[idx].plot(dates, data("internat", "rank"), color="black")
+        axs[idx].plot(dates, data("internat", "condition_rank"), color="black", ls="--")
         axs[idx].legend(
             (
                 "Place dans le groupe",
@@ -107,15 +112,15 @@ for wish_id, wish in by_wish.items():
                 "Condition pour rentrer",
             )
         )
-        # plot(data("date"), data("internat", "group_waitlist_rank"), color="blue")
-        # plot(data("date"), data("internat", "rank"), color="black")
+        # plot(dates, data("internat", "group_waitlist_rank"), color="blue")
+        # plot(dates, data("internat", "rank"), color="black")
         # plot(
-        #     data("date"),
+        #     dates,
         #     data("internat", "condition_group_waitlist_rank"),
         #     color="blue",
         #     ls="--",
         # )
-        # plot(data("date"), data("internat", "condition_rank"), color="black", ls="--")
+        # plot(dates, data("internat", "condition_rank"), color="black", ls="--")
     axs[idx].set_title(truncate_title(name))
     idx += 1
 subplots_adjust(hspace=0.4)
