@@ -1,5 +1,7 @@
 # parcoursup-dataviz
 
+![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg)
+
 ## Installation
 
 You need [poetry](https://python-poetry.org) to install this.
