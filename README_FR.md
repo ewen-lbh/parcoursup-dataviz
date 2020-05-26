@@ -65,7 +65,7 @@ parcoursup-dataviz --json
                 "last_year_max_admitted_rank" : "Position la plus loin dans la liste d'appel à avoir été acceptée en 2019",
             },
             "internat" : {
-                "capacité" : "capacité de l'internat",
+                "capacity" : "capacité de l'internat",
                 "group_waitlist_rank" : "Position dans la file d'attente du groupe",
                 "rank" : "Position dans la file d'attente",
                 "condition_group_waitlist_rank" : "Ont reçu une proposition tous ceux qui était positionnés avant où à cette position dans la file d'attente du groupe (ET voir condition_rank)",
