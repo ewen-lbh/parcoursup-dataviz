@@ -1,8 +1,11 @@
 [tool.poetry]
-name = "automation-parcoursup"
+name = "parcoursup-dataviz"
 version = "0.1.0"
 description = ""
 authors = ["Ewen Le Bihan <ewen.lebihan7@gmail.com>"]
+
+[tool.poetry.scripts]
+parcoursup-dataviz = "parcoursup_dataviz.cli:run"
 
 [tool.poetry.dependencies]
 python = "^3.6"
@@ -16,6 +19,7 @@ matplotlib = "^3.2.1"
 
 [tool.poetry.dev-dependencies]
 rope = "^0.17.0"
+pylint = "^2.5.2"
 
 [build-system]
 requires = ["poetry>=0.12"]

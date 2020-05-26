@@ -12,15 +12,7 @@ from docopt import docopt
 
 
 def run(**cli_args):
-    args = cli_args or docopt(
-        """Usage: automation_parcoursup.py [options]
-
-    -c --cache              Use the cache (in ~/.cache/automation-parcoursup/admission.html)
-    -B --no-browser         Hide the browser
-    -C --credentials=FILE   Use the following file (.env format) for parcoursup credentials.
-                            keys: PARCOURSUP_ID (N° de dossier) and PARCOURSUP_PASS (Mot de passe)
-    """
-    )
+    args = cli_args
     parcoursup_id = None
     parcoursup_pass = None
     if args["--credentials"]:
@@ -45,21 +37,25 @@ def run(**cli_args):
     if parcoursup_id is None or parcoursup_pass is None:
         exit(1)
     # Récup le cache si présent
-    cachedir = path.expanduser("~/.cache/automation-parcoursup")
+    cachedir = path.expanduser("~/.cache/parcoursup-dataviz")
+    datadir = path.expanduser("~/.parcoursup-dataviz")
     if not path.exists(cachedir):
         makedirs(cachedir)
     yyyymmdd = date.today().isoformat()
-    if path.exists(path.join(cachedir, "data.json")):
-        with open(path.join(cachedir, "data.json"), "r") as file:
+    data_filepath = path.join(datadir, f"data.json")
+    html_cache_filepath = path.join(cachedir, f"{yyyymmdd}-page.html")
+    if path.exists(data_filepath):
+        with open(path.join(cachedir, data_filepath), "r") as file:
             raw = file.read() or "{}"
             wishes_data = json.loads(raw)
             wishes_data[yyyymmdd] = []
     else:
         wishes_data = {yyyymmdd: []}
 
-    cachefile = path.join(cachedir, "admission.html")
-    if path.exists(cachefile) and args["--cache"]:
-        soup = BeautifulSoup(open(cachefile).read(), features="lxml")
+    if args["--html"] and args["--in"]:
+        soup = BeautifulSoup(open(args["--in"]).read(), features="lxml")
+    elif path.exists(data_filepath) and not args["--no-cache"]:
+        soup = BeautifulSoup(open(html_cache_filepath).read(), features="lxml")
     else:
         browser = start_chrome(
             "https://dossierappel.parcoursup.fr/Candidat/authentification",
@@ -76,10 +72,7 @@ def run(**cli_args):
         # Fermer le navigateur, on en a plus besoin
         browser.close()
         # On écrit le cache
-        with open(cachefile, "w") as file:
-            file.write(raw_html)
-        # On écrit l'archive
-        with open(path.join(cachedir, f"admission-{yyyymmdd}.html"), "w") as file:
+        with open(html_cache_filepath, "w") as file:
             file.write(raw_html)
         # On parse l'HTML avec bs4
         soup = BeautifulSoup(raw_html, features="lxml")
@@ -98,7 +91,6 @@ def run(**cli_args):
         wish_name = re.sub(r" {2,}", " ", wish_name)
         # Récup les rangs dans la popup
         popup = soup.find("div", id=f"lst_att_{wish_id}")
-        print(f"Scanning {wish_id}")
         is_internat = (
             "internat" in popup.find_all("ul")[0].find_all("li")[0].contents[0]
         )
@@ -164,7 +156,8 @@ def run(**cli_args):
         )
 
     # Output JSON
-    with open(path.join(cachedir, "data.json"), "w") as file:
+    makedirs(path.dirname(data_filepath), exist_ok=True)
+    with open(data_filepath, "w") as file:
         file.write(json.dumps(wishes_data, indent=2))
 
     return wishes_data
