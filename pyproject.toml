@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "parcoursup-dataviz"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Ewen Le Bihan <ewen.lebihan7@gmail.com>"]
 
