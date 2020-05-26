@@ -4,20 +4,49 @@
 
 ## Installation
 
-You need [poetry](https://python-poetry.org) to install this.
+:warning: Support for Windows has not been tested for yet :warning:
+
+parcoursup-dataviz is now available on PyPI:
 
 ```sh-session
-git clone https://github.com/ewen-lbh/parcoursup-dataviz
-cd parcoursup-dataviz
-poetry install
+pip install parcoursup-dataviz
 ```
 
 ## Usage
 
+NOTE: Wish names have been cut out from the demo images, you'll of course see them. Images are also slightly red-tinted here because I took screenshots and my computer has transparent windows, the images themselves has a perfectly white background.
+
+Execute `parcoursup-dataviz --help` to get help on all the options available.
+
+### Get graphs
+
+The scripts takes the same CLI arguments as `scraper.py`
+
+```sh-session
+parcoursup-dataviz --out my-wishes.png
+```
+
+Example for one wish:
+
+![One graph plotting waitlist position & length over time for a wish](./demo-graph.png)
+
+### Get a table (WIP)
+
+```
+parcoursup-dataviz --table --out my-table.html
+```
+
+NOTE: For now "internship" wishes show only N/A values
+
+You can also get a table which looks like this:
+
+![Table showing numbers for three wishes](./demo-table.png)
+
+
 ### Just get the JSON
 
 ```sh-session
-poetry run python parcoursup_dataviz/scraper.py
+parcoursup-dataviz --json
 ```
 
 ```json
@@ -51,20 +80,3 @@ Here's where these values are extracted from the website:
 ![parcoursup interface for ranks with labels showing the corresponding JSON keys](ranks-properties-explanation.png)
 
 ![parcoursup interface for boarding school ranks with labels showing the corresponding JSON keys](internat-properties-explanation.png)
-
-
-### Get graphs
-
-The scripts takes the same CLI arguments as `scraper.py`
-
-```sh-session
-poetry run python parcoursup_dataviz/visualizer.py
-```
-
-Example for one wish:
-
-![One graph plotting waitlist position & length over time for a wish](./demo-graph.png)
-
-NOTE: The wish name has been cut out from the demo image, you'll of course see it.
-
-NOTE: The image is slightly red-tinted here because of my transparent desktop background, the image itself has a perfectly white background.
