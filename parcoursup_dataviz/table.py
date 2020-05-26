@@ -12,25 +12,26 @@ def wrap_in_template(content: str) -> str:
     with open(template_filepath) as file:
         template_before, template_after = (
             file.read()
-            .format(today=datetime.date.today().isoformat())
+            .replace('{today}', datetime.date.today().strftime('%d %B %Y'))
             .split("<!-- CONTENT GOES HERE -->")
         )
     return template_before + content + template_after
 
 
-def to_html_row(wish: Dict[str, Any], prev_wish: Optional[dict] = None) -> str:
-    print('to_html_row', wish)
+def to_html_row(wish: Dict[str, Any], same_wish: bool = False) -> str:
     try:
+        static_value = lambda x: '' if same_wish else x
+        fmt_date = datetime.date.fromisoformat(wish['date']).strftime('%b %d')
         return f"""
-        <tr id="{wish['id']}">
-            <td>{'' if prev_wish and prev_wish['name'] == wish['name'] else wish['name']}</td>
-            <td>{wish['date']}</td>
-            <td>{wish['ranks']['group_capacity']}</td>
-            <td>{wish['ranks']['waitlist_length']}</td>
-            <td>{wish['ranks']['rank']}</td>
-            <td>{wish['ranks']['calllist_rank']}</td>
-            <td>{wish['ranks']['max_admitted_rank']}</td>
-            <td>{wish['ranks']['last_year_max_admitted_rank']}</td>
+        <tr {'class="new-wish"' if not same_wish else ''}>
+            <td class="static">{static_value(wish['name'])}</td>
+            <td class="static">{static_value(str(wish['ranks']['group_capacity']).replace('None', '<i>N/A</i>'))}</td>
+            <td>{fmt_date}</td>
+            <td>{str(wish['ranks']['waitlist_length']).replace('None', '<i>N/A</i>')}</td>
+            <td>{str(wish['ranks']['rank']).replace('None', '<i>N/A</i>')}</td>
+            <td class="static">{static_value(str(wish['ranks']['calllist_rank']).replace('None', '<i>N/A</i>'))}</td>
+            <td>{str(wish['ranks']['max_admitted_rank']).replace('None', '<i>N/A</i>')}</td>
+            <td class="static">{static_value(str(wish['ranks']['last_year_max_admitted_rank']).replace('None', '<i>N/A</i>'))}</td>
         </tr>
         """.strip()
     except KeyError as e:
@@ -45,13 +46,12 @@ def create_table(wishes_data: Dict[str, List[Dict[str, Any]]]) -> str:
     wishes_flat = []
     for date, wishes in wishes_data.items():
         for wish in wishes:
-            print('append')
             wishes_flat.append({**wish, 'date': date})
-    print('sort')
     wishes_flat = sorted(wishes_flat, key=lambda o: o['id'])
     for i, wish in enumerate(wishes_flat):
         prev_wish = wishes_flat[i-1] if i > 0 else None
-        rows_html += to_html_row(wish, prev_wish)
+        same_wish = bool(prev_wish and prev_wish['name'] == wish['name'])
+        rows_html += to_html_row(wish, same_wish)
     return wrap_in_template(rows_html)
 
 

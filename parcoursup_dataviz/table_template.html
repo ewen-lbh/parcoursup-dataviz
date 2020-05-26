@@ -3,24 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parcoursup - Vœux en attente ({today})</title>
+    <title>Parcoursup - Vœux en attente (Généré le {today})</title>
 </head>
 <body>
+    <h1>Parcoursup - Vœux en attente</h1>
+    <p>Généré le {today}</p>
     <table>
         <thead>
             <tr>
-                <th rowspan="2">Formation</th>
-                <th rowspan="2">Date</th>
-                <th rowspan="2">Taille du groupe</th>
+                <th rowspan="3">Formation</th>
+                <th rowspan="3">Taille du groupe</th>
+                <th rowspan="3">Date</th>
                 <th colspan="2">File d'attente</th>
                 <th colspan="3">Liste d'appel</th>
             </tr>
             <tr>
-                <th>Taille</th>
-                <th>Position</th>
-                <th>Position</th>
-                <th>Dernière position prise</th>
-                <th>Dernière position prise en 2019</th>
+                <th rowspan="2">Taille</th>
+                <th rowspan="2">Position</th>
+                <th rowspan="2">Position</th>
+                <th colspan="2">Dernière position admise</th>
+            </tr>
+            <tr>
+                <th>En 2020</th>
+                <th>En 2019</th>
             </tr>
         </thead>
         <tbody>
@@ -32,4 +37,38 @@
     
     </style>
 </body>
+<style>
+    body {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    tr td:not(:nth-child(1)):not(:nth-child(2)) {
+        text-align: right;
+    }
+    th, td {
+        padding: 5px 20px;
+    }
+    tbody td:first-child, thead tr:first-child th:first-child {
+        max-width: 350px;
+    }
+    thead tr {
+        background: silver;
+    }
+    .new-wish td {
+        border-top: 2px solid black;
+        background: white;
+    }
+    .new-wish td.static {
+        position: sticky;
+        top: 90px;
+    }
+    thead {
+        position: sticky;
+        top: 0;
+        background: white;
+        height: 90px;
+    }
+</style>
 </html>
