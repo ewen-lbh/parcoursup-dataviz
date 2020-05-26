@@ -45,7 +45,7 @@ def run(**cli_args):
     data_filepath = path.join(datadir, f"data.json")
     html_cache_filepath = path.join(cachedir, f"{yyyymmdd}-page.html")
     if path.exists(data_filepath):
-        with open(path.join(cachedir, data_filepath), "r") as file:
+        with open(path.join(cachedir, data_filepath), "r", encoding='utf-8') as file:
             raw = file.read() or "{}"
             wishes_data = json.loads(raw)
             wishes_data[yyyymmdd] = []
@@ -53,9 +53,9 @@ def run(**cli_args):
         wishes_data = {yyyymmdd: []}
 
     if args["--html"] and args["--in"]:
-        soup = BeautifulSoup(open(args["--in"]).read(), features="lxml")
+        soup = BeautifulSoup(open(args["--in"], encoding='utf-8').read(), features="lxml")
     elif path.exists(data_filepath) and not args["--no-cache"]:
-        soup = BeautifulSoup(open(html_cache_filepath).read(), features="lxml")
+        soup = BeautifulSoup(open(html_cache_filepath, encoding='utf-8').read(), features="lxml")
     else:
         browser = start_chrome(
             "https://dossierappel.parcoursup.fr/Candidat/authentification",
@@ -72,7 +72,7 @@ def run(**cli_args):
         # Fermer le navigateur, on en a plus besoin
         browser.close()
         # On écrit le cache
-        with open(html_cache_filepath, "w") as file:
+        with open(html_cache_filepath, "w", encoding='utf-8') as file:
             file.write(raw_html)
         # On parse l'HTML avec bs4
         soup = BeautifulSoup(raw_html, features="lxml")
@@ -157,7 +157,7 @@ def run(**cli_args):
 
     # Output JSON
     makedirs(path.dirname(data_filepath), exist_ok=True)
-    with open(data_filepath, "w") as file:
+    with open(data_filepath, "w", encoding='utf-8') as file:
         file.write(json.dumps(wishes_data, indent=2))
 
     return wishes_data
