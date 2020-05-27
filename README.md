@@ -1,10 +1,11 @@
+
 # parcoursup-dataviz
+
+<center> <a href="README_FR.md"> Français </a> &bull; <a href="README.md"> English </a> </center>
 
 ![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fgithub.com%2Fewen-lbh%2Fparcoursup-dataviz)
 
 ## Installation
-
-:warning: Support for Windows has not been tested for yet :warning:
 
 parcoursup-dataviz is now available on PyPI:
 

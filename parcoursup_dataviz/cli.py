@@ -39,13 +39,13 @@ import json
 def run():
     args = docopt(__doc__)
     if args["--in"] and not args['--html']:
-        data = json.loads(open(args["--in"]).read())
+        data = json.loads(open(args["--in"], encoding='utf-8').read())
     else:
         data = scraper.run(**args)
     if args['--json']:
         jsoned = json.dumps(data, indent=2)
         if args["--out"]:
-            with open(args["--out"]) as file:
+            with open(args["--out"], encoding='utf-8') as file:
                 file.write(jsoned)
         else:
             print(jsoned)

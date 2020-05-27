@@ -9,7 +9,7 @@ from typing import Optional
 
 def wrap_in_template(content: str) -> str:
     template_filepath = path.join(path.dirname(__file__), "table_template.html")
-    with open(template_filepath) as file:
+    with open(template_filepath, encoding='utf-8') as file:
         template_before, template_after = (
             file.read()
             .replace('{today}', datetime.date.today().strftime('%d %B %Y'))
@@ -58,7 +58,7 @@ def create_table(wishes_data: Dict[str, List[Dict[str, Any]]]) -> str:
 def run(wishes_data, **cli_args):
     html = create_table(wishes_data)
     if cli_args["--out"]:
-        with open(cli_args["--out"], "w") as file:
+        with open(cli_args["--out"], "w", encoding='utf-8') as file:
             file.write(html)
     else:
         print(html)
