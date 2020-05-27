@@ -21,7 +21,7 @@ def wrap_in_template(content: str) -> str:
 def to_html_row(wish: Dict[str, Any], same_wish: bool = False) -> str:
     try:
         static_value = lambda x: '' if same_wish else x
-        fmt_date = datetime.date.fromisoformat(wish['date']).strftime('%b %d')
+        fmt_date = datetime.datetime.strptime(wish['date'], '%Y-%m-%d').strftime('%b %d')
         return f"""
         <tr {'class="new-wish"' if not same_wish else ''}>
             <td class="static">{static_value(wish['name'])}</td>
