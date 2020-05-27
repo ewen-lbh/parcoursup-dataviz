@@ -54,7 +54,7 @@ def run(**cli_args):
 
     if args["--html"] and args["--in"]:
         soup = BeautifulSoup(open(args["--in"]).read(), features="lxml")
-    elif path.exists(data_filepath) and not args["--no-cache"]:
+    elif path.exists(html_cache_filepath) and not args["--no-cache"]:
         soup = BeautifulSoup(open(html_cache_filepath).read(), features="lxml")
     else:
         browser = start_chrome(
