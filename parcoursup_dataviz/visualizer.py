@@ -37,7 +37,8 @@ def fill_list_to_len(o: list, target_len: int, fill_with: Any = None) -> list:
 
 def run(wishes_data, args):
     # Aggregate by wish
-    dates = list(wishes_data.keys())
+    show_date_every_n_days = int(args['--date-label-every'])
+    dates = [ d if i % show_date_every_n_days == 0 else '' for i, d in enumerate(wishes_data.keys())]
     by_wish: Dict[str, Any] = {}
     for date, wishes in wishes_data.items():
         for wish in wishes:
@@ -97,8 +98,6 @@ Please update your JSON file"""
             axs[idx].plot(dates, data("ranks", "rank", fill_with=0), color="black")
             axs[idx].plot(dates, data("ranks", "waitlist_length"), color="blue")
             axs[idx].legend(("Position", "Taille de la file d'attente"))
-            # plot(data('date'), data('ranks', 'last_year_max_admitted_rank'), color='red', ls='--')
-            # plot(data('date'), data('ranks', 'calllist_rank'), color='red')
         else:
             axs[idx].plot(
                 dates,
@@ -123,15 +122,6 @@ Please update your JSON file"""
                     "Condition pour rentrer",
                 )
             )
-            # plot(dates, data("internat", "group_waitlist_rank"), color="blue")
-            # plot(dates, data("internat", "rank"), color="black")
-            # plot(
-            #     dates,
-            #     data("internat", "condition_group_waitlist_rank"),
-            #     color="blue",
-            #     ls="--",
-            # )
-            # plot(dates, data("internat", "condition_rank"), color="black", ls="--")
         axs[idx].set_title(truncate_title(name))
         idx += 1
     subplots_adjust(hspace=0.4)
