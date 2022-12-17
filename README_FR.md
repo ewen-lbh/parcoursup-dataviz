@@ -37,7 +37,7 @@ Exemple pour un souhait :
 parcoursup-dataviz --table --out my-table.html
 ```
 
-NOTE : Pour l'instant, les souhaits de "stage" n'indiquent que des valeurs N/A
+NOTE : Pour l'instant, les souhaits d'internat n'indiquent que des valeurs N/A
 
 Vous pouvez également obtenir une table qui ressemble à celle-ci :
 

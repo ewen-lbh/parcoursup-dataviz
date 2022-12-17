@@ -52,7 +52,7 @@ parcoursup-dataviz --json
 
 ```json
 {
-    "AAAA-MM-JJ": [
+    "YYYY-MM-DD": [
         {
             "id": "identifiant dans le DOM (pas très utile)",
             "name": "Nom de la formation",
